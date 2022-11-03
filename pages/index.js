@@ -2,12 +2,13 @@ import React, {useState} from 'react';
 import dynamic from "next/dynamic";
 // import {connect} from "react-redux";
 
-let CustomEditor = dynamic(() => import('../components/testeditor'), {
-    ssr: false
+
+const CustomEditor = dynamic(() => import('../components/testeditor.js'), {
+	ssr: false
 });
 
-const New = () => {
-    // const [imageArray, setImageArray] = useState([]) // to keep track of uploaded image
+const EditorPage = () => {
+	// const [imageArray, setImageArray] = useState([]) // to keep track of uploaded image
     // let [editorInstance, setEditorInstance] = useState({}) // to get the instance of editor.Js
 
     // // remove image from imageArray
@@ -64,16 +65,19 @@ const New = () => {
     // }
 
     return (
+		<>
+		<h1>Editor</h1>
 		<CustomEditor />
-        // <Fragment>
+         {/* <Fragment> */}
 
-        // {/* <button onClick={saveArticle}>Save</button> */}
+         {/* <button onClick={saveArticle}>Save</button> */}
 
-        // {CustomEditor && <CustomEditor handleInstance={handleInstance} imageArray={imageArray}/>}
+         {/* {CustomEditor && <CustomEditor handleInstance={handleInstance} imageArray={imageArray}/>} */}
 
-        // </Fragment>
+         {/* </Fragment> */}
+		</>
     );
 }
 
-export default New;
+export default EditorPage;
 // export default connect(state => state)(New);

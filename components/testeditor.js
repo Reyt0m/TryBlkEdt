@@ -1,5 +1,4 @@
-import EditorJS from "react-editor-js";
-// import EditorJS from '@editorjs/editorjs';
+import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import CheckList from "@editorjs/checklist";
 import code from "@editorjs/code";
@@ -14,9 +13,16 @@ import SimpleImage from "@editorjs/simple-image";
 
 // import API from '../api/image' // Your server url
 
-const CustomEditor = ({}) => {
-  const tools = {
-    header: Header,
+const CustomEditor = ({ type }) => {
+  // const Editor = createReactEditorJS({
+  // 	holder: 'EditorJS',
+  // });
+
+  const TOOLS = {
+    header: {
+		class:Header,
+		inlineToolbar: true,
+	},
     checklist: CheckList,
     code: code,
     delimiter: Delimiter,
@@ -47,16 +53,16 @@ const CustomEditor = ({}) => {
     //           }
     //   }
   };
-  // Editor.js This will show block editor in component
-  // pass EDITOR_JS_TOOLS in tools props to configure tools with editor.js
+  const editor = new EditorJS({
+    holder: "editorjs",
+    tools: TOOLS,
+	plaseceholder: "Start writing your story...",
+  });
+
+
   return (
     <>
-      <EditorJS
-        // instanceRef={(instance) => handleInstance(instance)}
-        tools={tools}
-        // data={data}
-        placeholder={`Write from here...`}
-      />
+      <div id="editorjs"></div>
     </>
   );
 };
