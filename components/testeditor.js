@@ -10,7 +10,7 @@ import LinkTool from "@editorjs/link";
 import List from "@editorjs/list";
 import Quote from "@editorjs/quote";
 import SimpleImage from "@editorjs/simple-image";
-
+import DragDrop from 'editorjs-drag-drop';
 // import API from '../api/image' // Your server url
 
 const CustomEditor = ({ type }) => {
@@ -56,6 +56,9 @@ const CustomEditor = ({ type }) => {
   const editor = new EditorJS({
     holder: "editorjs",
     tools: TOOLS,
+	onReady: () => {
+		new DragDrop(editor);
+	  },
 	plaseceholder: "Start writing your story...",
   });
 
