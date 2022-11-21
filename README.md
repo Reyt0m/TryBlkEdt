@@ -15,3 +15,8 @@ npm i --save @editorjs/link
 npm i --save @editorjs/list
 npm i --save @editorjs/quote
 npm i --save @editorjs/simple-image
+
+## to use
+npm install
+npm upgrade
+npm run dev
