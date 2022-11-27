@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 
 const CustomEditor = dynamic(() => import("../components/Editor.js"), {
@@ -8,6 +8,11 @@ const CustomEditor = dynamic(() => import("../components/Editor.js"), {
 const Home = () => {
   const [data, setData] = useState();
 
+  const memoDate = useMemo(() => {
+    return Date()
+  }, [])
+
+
   return (
     <>
       <h1>Editor</h1>
@@ -16,6 +21,7 @@ const Home = () => {
         onChange={setData}
         holder="editorjs-container"
       />
+	    <div>{memoDate}</div>
     </>
   );
 };
