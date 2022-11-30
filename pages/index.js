@@ -9,9 +9,14 @@ const Home = () => {
   const [data, setData] = useState();
 
   const memoDate = useMemo(() => {
-    return Date()
-  }, [])
+    return Date();
+  }, []);
 
+  const test = () => {
+    console.log("test");
+    console.log();
+  };
+  test.toolbox;
 
   return (
     <>
@@ -21,7 +26,7 @@ const Home = () => {
         onChange={setData}
         holder="editorjs-container"
       />
-	    <div>{memoDate}</div>
+      <div>{memoDate}</div>
     </>
   );
 };
