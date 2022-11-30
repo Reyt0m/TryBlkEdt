@@ -11,32 +11,62 @@
  */
 import React, { useState, useMemo } from "react";
 
+// classでなら実装は簡単だけど。。
+class BlockLayer {
+  static get toolbox() {
+    return {
+      title: "BlockLayer",
+      icon: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg />',
+    };
+  }
 
-const BlockLayer = () => {
-	// static getter をFCで実装するには？
-	// つまり、toolboxっていうAPIの中身をまず取ってきて、中身をチェックし、そこにデータを付け加えるという関数を書くことが必要
-	// static getterは、最初に関数を外のスコープから呼び出してきて、その関数の中で、static getterを呼び出すことで、static getterの中身を取得することができる。その後、static getterの中身を書き換えることができる。
-	const toolbox = useMemo(() => {
-		return {
-			icon:'<svg width="17" height="15" viewBox="0 0 336 276" xmlns="http://www.w3.org/2000/svg"><path d="M291 150V79c0-19-15-34-34-34H79c-19 0-34 15-34 34v42l67-44 81 72 56-29 42 30zm0 52l-43-30-56 30-81-67-66 39v23c0 19 15 34 34 34h178c17 0 31-13 34-29zM79 0h178c44 0 79 35 79 79v118c0 44-35 79-79 79H79c-44 0-79-35-79-79V79C0 35 35 0 79 0z"/></svg>',
-			title: 'BlockLayer',
-		}
-	}, []);
-	// const toolbox = () => {
-	// 	return(
-	// 		icon:'<svg width="17" height="15" viewBox="0 0 336 276" xmlns="http://www.w3.org/2000/svg"><path d="M291 150V79c0-19-15-34-34-34H79c-19 0-34 15-34 34v42l67-44 81 72 56-29 42 30zm0 52l-43-30-56 30-81-67-66 39v23c0 19 15 34 34 34h178c17 0 31-13 34-29zM79 0h178c44 0 79 35 79 79v118c0 44-35 79-79 79H79c-44 0-79-35-79-79V79C0 35 35 0 79 0z"/></svg>',
-	// 		title: 'BlockLayer',
-	// 	)
-	// 	}
-	// 一旦データ？として定義
+  constructor({ data }) {
+    this.data = data;
+    this.wrapper = undefined;
+  }
 
-	// 多分これでsaveの効果はあるはず？
-	const [block, setBlock] = useState(null);
-	return(
-		<>
-			<h1>BlockLayer</h1>
-			<input label="test" onChange={setBlock}></input>
-		</>
-	)
+//   hooks使おうとしても無理だった。
+//   blockLayer = () => {
+// 	const [value, setValue] = useState();
+// 	return(
+// 		<div className="block-layer">
+// 			<div>
+// 				<input onChange={setValue}>{value}</input>
+// 				{JSON.stringify(this.data, null, 2)}
+// 			</div>
+// 		</div>
+// 	);
+//   }
+
+
+  render() {
+    this.wrapper = document.createElement("div");
+    this.wrapper.classList.add("block-layer");
+
+    const pre = document.createElement("pre");
+    const code = document.createElement("code");
+    const textarea = document.createElement("textarea");
+    textarea.value = this.data.code ? this.data.code : "";
+
+    this.wrapper.appendChild(pre);
+    pre.appendChild(code);
+    code.appendChild(textarea);
+
+    textarea.addEventListener("input", () => {
+      const scrollHeight = textarea.scrollHeight;
+      textarea.style.height = scrollHeight + "px";
+    });
+
+    return this.wrapper;
+  }
+
+  save(blockContent) {
+    const textarea = blockContent.querySelector(textarea);
+    const code = textarea.value;
+    return {
+      code,
+    };
+  }
 }
+
 export default BlockLayer;

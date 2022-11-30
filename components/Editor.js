@@ -6,6 +6,7 @@ import DragDrop from "editorjs-drag-drop";
 const CustomEditor = ({ data, onChange, holder }) => {
   //initialize editorjs
   const ref = useRef();
+  
   useEffect(() => {
     //initialize editor if we don't have a reference
     if (!ref.current) {
