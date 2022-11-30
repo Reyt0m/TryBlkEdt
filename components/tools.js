@@ -33,7 +33,7 @@ const TOOLS = {
   list: List,
   quote: Quote,
   simpleImage: SimpleImage,
-//   new: BlockLayer,
+  code: BlockLayer,
   // image: {
   //   class: Image,
   //   config: {
