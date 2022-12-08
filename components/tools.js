@@ -11,12 +11,15 @@ import Quote from "@editorjs/quote";
 import SimpleImage from "@editorjs/simple-image";
 import BlockLayer from "../plugins/blockLayer";
 import { Paragraph } from "@editorjs/paragraph";
+import NestedList from "@editorjs/nested-list";
+import Marker from "../plugins/marker";
+import Nest from "../plugins/nest";
 // import API from '../api/image'
 
 const TOOLS = {
-	header: {
+  header: {
     class: Header,
-	inlineToolbar: true,
+    inlineToolbar: true,
     shortcut: "CONTROL+SHIFT+2",
     config: {
       placeholder: "ヘッダー",
@@ -31,9 +34,18 @@ const TOOLS = {
   inlineCode: InlineCode,
   linkTool: LinkTool,
   list: List,
+  list: {
+    class: NestedList,
+    inlineToolbar: true,
+  },
   quote: Quote,
   simpleImage: SimpleImage,
-  code: BlockLayer,
+  Marker: {
+    class: Marker,
+  },
+  Nest: {
+    class: Nest,
+  },
   // image: {
   //   class: Image,
   //   config: {

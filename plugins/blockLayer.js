@@ -8,6 +8,9 @@
 
 まずは、一つのブロックを通常より右にずらした位置に配置する方法を考える。
 階層を動かすは、ブロックへの影響であるから、block APIを使う。
+
+階層化については、appendchildで対応出来る。しかし、それを視覚的にわかりやすくするためには別の方法が必要になる。
+pluginではあくまでブロック生成ができるがここで行いたいのは、他のブロックに対してネストを要求するようなものであるはず。
  */
 import React, { useState, useMemo } from "react";
 
@@ -29,13 +32,13 @@ class BlockLayer {
     this.wrapper = document.createElement("div");
     this.wrapper.classList.add("block-layer");
 
-    const pre = document.createElement("pre");
+    const nest = document.createElement("nest");
     const code = document.createElement("code");
     const textarea = document.createElement("textarea");
     textarea.value = this.data.code ? this.data.code : "";
 
-    this.wrapper.appendChild(pre);
-    pre.appendChild(code);
+    this.wrapper.appendChild(nest);
+    nest.appendChild(code);
     code.appendChild(textarea);
 
     textarea.addEventListener("input", () => {
