@@ -28,7 +28,6 @@ export default class Nest {
     this.state = false;
     this.api = api;
     this.tag = "Nest";
-    // this.class = "cdx-nest";
     this.count = 0;
   }
   //   css ?これが必要かどうかは不明
@@ -43,12 +42,6 @@ export default class Nest {
         "cdx-nest-5",
         "cdx-nest-6",
       ],
-      // nest1 : 'cdx-nest-1',
-      // nest2 : 'cdx-nest-2',
-      // nest3 : 'cdx-nest-3',
-      // nest4 : 'cdx-nest-4',
-      // nest5 : 'cdx-nest-5',
-      // nest6 : 'cdx-nest-6',
     };
   }
   // render 処理をするためのボタン作成
@@ -57,50 +50,36 @@ export default class Nest {
     this.button.type = "button";
     this.button.textContent = "Nest";
 
-    // this.button.innerHTML = toolIcon
-    // this.button.classList.add(this.api.styles.inlineToolButton);
+    // TODO: icon追加
     return this.button;
   }
 
   // surround　指定された範囲内の要素に対する処理　ここにブロックの位置を移動する処理を書く
   surround(range) {
     // rangeをブロックに拡張する
-    // const selectedBlock = range.commonAncestorContainer;
-    // selectedBlockをelementとして取得
-    // const selectedElement = selectedBlock.parentElement;
-
-    // 回数制で右にずれた回数を使って計算するのがよいだろうか。margin調節があればそれが一番良いはず。tabとshift TABで切り替えればよい。
-    // クラス呼び出しで、インスタンス生成している形式のはずだから、値を保持するインスタンスを作る必要があるかも
     const selectedElement = range.extractContents();
     const nest = document.createElement(this.tag);
-    // class nameを区別するか、javascriptの中でmarginの位置を分けるか。
-    // const countEl = document.createElement("span");
-    // countEl.appendChild(selectedElement);
-    // range.insertNode(countEl);
-    // countを保存する
 
+    // class切り替え
     let count = this.count;
-    // classを変更
     let className = this.CSS.nest[count];
     console.log(className);
 
-	// 　count up
-    count++;
+    // class追加
+    nest.classList.add(className);
+    nest.appendChild(selectedElement);
+    range.insertNode(nest);
+    console.log(nest);
+
+    // 　count up and save
+    if (this.count < this.CSS.nest.length - 1) {
+      count++;
+    }
     this.count = count;
 
-	
-    // this.class = "cdx-nest-" + count;
-    // countEl.textContent = className;
+    this.api.selection.expandToTag(nest);
 
-    // nest.classList.add(this.class);
-    // nest.appendChild(selectedElement);
-    // range.insertNode(countEL);
-    // console.log(nest);
-    // // leftを押してもinlinetoolしか反応しない
-    // let left = nest.style.marginLeft;
-    // console.log(nest.style);
-    // left + 10 + "px";
-    // this.api.selection.expandToTag(nest);
+    // tabキー読み込み
     // selectedElement.addEventListener("keydown", (event) => {
     //   if (event.key === "Tab") {
     // let style = window.getComputedStyle(selectedElement);
