@@ -13,7 +13,7 @@
 pluginではあくまでブロック生成ができるがここで行いたいのは、他のブロックに対してネストを要求するようなものであるはず。
 inlinebarで実装
 */
-import "../styles/pluguins.module.scss";
+import "../styles/plugins.module.scss";
 
 export default class Nest {
   static get isInline() {
@@ -22,16 +22,6 @@ export default class Nest {
   get shortcut() {
     return "TAB";
   }
-  // constructor
-  constructor({ api }) {
-    this.button = null;
-    this.state = false;
-    this.api = api;
-    this.tag = "Nest";
-    this.count = 0;
-  }
-  //   css ?これが必要かどうかは不明
-  // ここでスコープの中にいれて、cssの調整を色々やるべき。nested listを見れば良い。
   get CSS() {
     return {
       nest: [
@@ -44,6 +34,16 @@ export default class Nest {
       ],
     };
   }
+  // constructor
+  constructor({ api }) {
+    this.button = null;
+    this.state = false;
+    this.api = api;
+    this.tag = "Nest";
+    this.count = 0;
+  }
+  //   css ?これが必要かどうかは不明
+  // ここでスコープの中にいれて、cssの調整を色々やるべき。nested listを見れば良い。
   // render 処理をするためのボタン作成
   render() {
     this.button = document.createElement("button");
@@ -63,6 +63,7 @@ export default class Nest {
     // class切り替え
     let count = this.count;
     let className = this.CSS.nest[count];
+    // let className = Nest.CSS.nest[count];
     console.log(className);
 
     // class追加
@@ -76,6 +77,7 @@ export default class Nest {
       count++;
     }
     this.count = count;
+    console.log(count);
 
     this.api.selection.expandToTag(nest);
 
