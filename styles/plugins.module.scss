@@ -1,16 +1,5 @@
-.cdx-nest-1 .cdx-nest-2 .cdx-nest-3 .cdx-nest-4 .cdx-nest-5 .cdx-nest-6 {
-	line-height: 1.6em;
-	display: flex;
-	margin: 2px 0;
-	&::before {
-		// counter-increment: item;
-		margin-right: 5px;
-		white-space: nowrap;
-	}
-}
-.cdx-underline {
-  padding-left: 10rem;
-  text-decoration: underline;
+.cdx-nest-1, .cdx-nest-2, .cdx-nest-3, .cdx-nest-4, .cdx-nest-5, .cdx-nest-6{
+	margin: 1rem 2rem;
 }
 
 .ce-tune-alignment--right {

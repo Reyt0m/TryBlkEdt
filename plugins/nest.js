@@ -9,7 +9,7 @@ block tune plugin として実装
 
 */
 import "../styles/plugins.module.scss";
-import * as Dom from '../utils/dom';
+import * as Dom from "../utils/dom";
 
 export default class Nest {
   static get isTune() {
@@ -18,39 +18,68 @@ export default class Nest {
   get shortcut() {
     return "TAB";
   }
-  get CSS() {
-    return {
-      nest: [
-        "cdx-nest-1",
-        "cdx-nest-2",
-        "cdx-nest-3",
-        "cdx-nest-4",
-        "cdx-nest-5",
-        "cdx-nest-6",
-      ],
-    };
-  }
+
+  //   get CSS() {
+  //     return {
+  //       nest: [
+  //         "cdx-nest-1",
+  //         "cdx-nest-2",
+  //         "cdx-nest-3",
+  //         "cdx-nest-4",
+  //         "cdx-nest-5",
+  //         "cdx-nest-6",
+  //       ],
+  //     };
+  //   }
+
   // constructor
-  constructor({ api,data,config,block }) {
-    this.button = null;
+  constructor({ api, data, config, block }) {
     this.state = false;
     this.api = api;
-	this.data = data;
-	this.config = config;
-	this.block = block;
-    this.tag = "Nest";
+    this.data = data;
+    this.config = config;
+    this.block = block;
     this.count = 0;
-	this.wrapper = undefined;
+    this.paddingLeft = "0rem";
+    this.distance = 0;
   }
-  // render 処理をするためのボタン作成
-//   階層を増やすボタン
-  render() {
-console.log(this.data);
-const tuneWrapper = Dom.make('div','')
 
+  /**  blockを調整する
+   *  blockcontent取得
+   *  blockのpaddingを取得
+   *  直前のpaddingより小さい場合 10大きいところまで動ける
+   *  paddingは非負
+   *  paddingが直前のブロックより小さいとき、直前のブロックの子要素になる。
+   */
+  wrap(blockContent) {
+    this.wrapper = Dom.make("div");
+    this.wrapper.append(blockContent);
+    // this.wrapper.style.paddingLeft = "10rem";
+    // this.wrapper.style.padding = "0rem 0rem 0rem 10rem"
+    this.wrapper.style.paddingLeft = this.padding;
+    console.log(this.wrapper.style.paddingLeft);
+    return this.wrapper;
+  }
+
+  // render 処理をするためのボタン作成
+  render() {
+    const wrapper = Dom.make("div");
+    const button = document.createElement("button");
+    button.classList.add(this.api.styles.settingsButton);
+    button.innerHTML = "nest";
+    button.type = "button";
+    wrapper.appendChild(button);
+    addEventListener("click", (el) => {
+      this.distance += this.distance;
+      this.padding = this.distance + "rem";
+	  button.classList.toggle(this.api.styles.settingsButtonActive);
+    });
+	button.classList.toggle(this.api.styles.settingsButtonActive);
+    return wrapper;
   }
 
   // surround　指定された範囲内の要素に対する処理　ここにブロックの位置を移動する処理を書く
+  /**
   surround(range) {
     // rangeをブロックに拡張する
     const selectedElement = range.extractContents();
@@ -79,6 +108,7 @@ const tuneWrapper = Dom.make('div','')
 
     // tabキー読み込み
     // selectedElement.addEventListener("keydown", (event) => {
+
     //   if (event.key === "Tab") {
     // let style = window.getComputedStyle(selectedElement);
     // let left = parseInt(style.left);
@@ -88,15 +118,9 @@ const tuneWrapper = Dom.make('div','')
     // // 移動した状態のブロックを新しく挿入
     // range.insertNode(selectedElement);
   }
-  // checkState
-  checkState(selection) {
-    // const block = selection.anchorNode;
-    // if (!block) {
-    //   return;
-    // }
-    // // アンカーエレメントに代入する要素の取得
-    // const anchorElement =
-    //   block instanceof Element ? block : block.parentElement;
-    // this.state = !!anchorElement.closest("div");
+   */
+
+  save() {
+    return this.data;
   }
 }

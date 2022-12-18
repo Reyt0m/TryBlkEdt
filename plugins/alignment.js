@@ -1,10 +1,10 @@
 /**
  * Build styles
  */
-import '../styles/plugins.module.scss'
-import * as make from '../utils/dom';
+require('../styles/plugins.module.scss').toString();
+const {make} = require('../utils/dom');
 
-export default class AlignmentBlockTune {
+class AlignmentBlockTune {
 
     /**
      * Default alignment

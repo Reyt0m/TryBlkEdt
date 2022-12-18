@@ -9,12 +9,13 @@ import LinkTool from "@editorjs/link";
 import List from "@editorjs/list";
 import Quote from "@editorjs/quote";
 import SimpleImage from "@editorjs/simple-image";
-import BlockLayer from "../plugins/blockLayer";
 import { Paragraph } from "@editorjs/paragraph";
 import NestedList from "@editorjs/nested-list";
 import Underline from "../plugins/underline";
 import Nest from "../plugins/nest";
 import TextVariantTune from "@editorjs/text-variant-tune";
+import AlignmentBlockTune from "../plugins/alignment";
+// import AlignmentTuneTool from "editorjs-text-alignment-blocktune"
 // import API from '../api/image'
 
 const TOOLS = {
@@ -48,8 +49,12 @@ const TOOLS = {
     class: Nest,
   },
   textVariant: TextVariantTune,
+  textAlign: AlignmentBlockTune,
   paragraph: {
-    tunes: ["textVariant"],
+    // tunes: [
+    //   "textVariant",
+    //    "textAlign",
+    // ],
   },
   // image: {
   //   class: Image,
