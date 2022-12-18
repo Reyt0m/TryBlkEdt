@@ -7,10 +7,9 @@ const CustomEditor = dynamic(() => import("../components/Editor.js"), {
 
 const Home = () => {
   const [data, setData] = useState();
-
   return (
     <>
-      <h1>Editor</h1>
+      <h1 id="demo">Editor</h1>
       <CustomEditor
         data={data}
         onChange={setData}

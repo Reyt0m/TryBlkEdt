@@ -63,7 +63,6 @@ export default class Nest {
     // class切り替え
     let count = this.count;
     let className = this.CSS.nest[count];
-    console.log(className);
 
     // class追加
     nest.classList.add(className);

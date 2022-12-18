@@ -1,61 +1,128 @@
-/* 開発方法についてのコメント
- 階層構造をもつブロックを作る。全ブロックが階層構造を持つようにする。
-階層は、ブロックの親子関係を作るpluginで対応する。
-親子関係はどう作ればいい？
-
-親の性質は引き継ぐ
-位置が少し右にずれる。
-
-まずは、一つのブロックを通常より右にずらした位置に配置する方法を考える。
-階層を動かすは、ブロックへの影響であるから、block APIを使う。
-
-階層化については、appendchildで対応出来る。しかし、それを視覚的にわかりやすくするためには別の方法が必要になる。
-pluginではあくまでブロック生成ができるがここで行いたいのは、他のブロックに対してネストを要求するようなものであるはず。
+/**
+ * Build styles
  */
-import React, { useState, useMemo } from "react";
+require('../styles/pluguins.module.scss').toString();
+const {make} = require('../utils/make');
 
-// classでなら実装は簡単だけど。。
-class BlockLayer {
-  static get toolbox() {
-    return {
-      title: "BlockLayer",
-      icon: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg />',
-    };
-  }
+class AlignmentBlockTune {
 
-  constructor({ data }) {
-    this.data = data;
-    this.wrapper = undefined;
-  }
+    /**
+     * Default alignment
+     *
+     * @public
+     * @returns {string}
+     */
+    static get DEFAULT_ALIGNMENT() {
+        return 'left';
+    }
 
-  render() {
-    this.wrapper = document.createElement("div");
-    this.wrapper.classList.add("block-layer");
+    static get isTune() {
+        return true;
+    }
 
-    const nest = document.createElement("nest");
-    const code = document.createElement("code");
-    const textarea = document.createElement("textarea");
-    textarea.value = this.data.code ? this.data.code : "";
+    getAlignment(){
+        if(!!this.settings?.blocks && this.settings.blocks.hasOwnProperty(this.block.name)){
+            return this.settings.blocks[this.block.name]
+        }
+        if(!!this.settings?.default){
+            return this.settings.default
+        }
+        return AlignmentBlockTune.DEFAULT_ALIGNMENT
+    }
+    /**
+     *
+     * @param api
+     * @param data 既に設定されているデータ
+     * @param settings tuneに設定項目
+     * @param block tuneに設定されてるblock
+     */
+    constructor({ api, data, config, block}) {
+        this.api = api;
+        this.block = block;
+        /**
+         config:{
+            default: "right",
+            blocks: {
+              header: 'center',
+              list: 'right'
+            }
+          },
+         */
+        this.settings = config;
+        this.data = data || { alignment: this.getAlignment() }
+        this.alignmentSettings = [
+            {
+                name: 'left',
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" id="Layer" enable-background="new 0 0 64 64" height="20" viewBox="0 0 64 64" width="20"><path d="m54 8h-44c-1.104 0-2 .896-2 2s.896 2 2 2h44c1.104 0 2-.896 2-2s-.896-2-2-2z"/><path d="m54 52h-44c-1.104 0-2 .896-2 2s.896 2 2 2h44c1.104 0 2-.896 2-2s-.896-2-2-2z"/><path d="m10 23h28c1.104 0 2-.896 2-2s-.896-2-2-2h-28c-1.104 0-2 .896-2 2s.896 2 2 2z"/><path d="m54 30h-44c-1.104 0-2 .896-2 2s.896 2 2 2h44c1.104 0 2-.896 2-2s-.896-2-2-2z"/><path d="m10 45h28c1.104 0 2-.896 2-2s-.896-2-2-2h-28c-1.104 0-2 .896-2 2s.896 2 2 2z"/></svg>`
+            },
+            {
+                name: 'center',
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" id="Layer" enable-background="new 0 0 64 64" height="20" viewBox="0 0 64 64" width="20"><path d="m54 8h-44c-1.104 0-2 .896-2 2s.896 2 2 2h44c1.104 0 2-.896 2-2s-.896-2-2-2z"/><path d="m54 52h-44c-1.104 0-2 .896-2 2s.896 2 2 2h44c1.104 0 2-.896 2-2s-.896-2-2-2z"/><path d="m46 23c1.104 0 2-.896 2-2s-.896-2-2-2h-28c-1.104 0-2 .896-2 2s.896 2 2 2z"/><path d="m54 30h-44c-1.104 0-2 .896-2 2s.896 2 2 2h44c1.104 0 2-.896 2-2s-.896-2-2-2z"/><path d="m46 45c1.104 0 2-.896 2-2s-.896-2-2-2h-28c-1.104 0-2 .896-2 2s.896 2 2 2z"/></svg>`
+            },
+            {
+                name: 'right',
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" id="Layer" enable-background="new 0 0 64 64" height="20" viewBox="0 0 64 64" width="20"><path d="m54 8h-44c-1.104 0-2 .896-2 2s.896 2 2 2h44c1.104 0 2-.896 2-2s-.896-2-2-2z"/><path d="m54 52h-44c-1.104 0-2 .896-2 2s.896 2 2 2h44c1.104 0 2-.896 2-2s-.896-2-2-2z"/><path d="m54 19h-28c-1.104 0-2 .896-2 2s.896 2 2 2h28c1.104 0 2-.896 2-2s-.896-2-2-2z"/><path d="m54 30h-44c-1.104 0-2 .896-2 2s.896 2 2 2h44c1.104 0 2-.896 2-2s-.896-2-2-2z"/><path d="m54 41h-28c-1.104 0-2 .896-2 2s.896 2 2 2h28c1.104 0 2-.896 2-2s-.896-2-2-2z"/></svg>`
+            }
+        ];
+        this._CSS = {
+            alignment: {
+                left: 'ce-tune-alignment--left',
+                center: 'ce-tune-alignment--center',
+                right: 'ce-tune-alignment--right',
+            }
+        }
+    }
 
-    this.wrapper.appendChild(nest);
-    nest.appendChild(code);
-    code.appendChild(textarea);
+    /**
+     * block自体をwrapしてくれる
+     * constructorで与えられたalignmentを代入しようとすると、holderが確定してなく
+     * renderでやろうとすると、tuneを表示時に処理が走る
+     * @param blockContent
+     */
+    wrap(blockContent) {
+        this.wrapper = make("div");
+        this.wrapper.classList.toggle(this._CSS.alignment[this.data.alignment])
+        this.wrapper.append(blockContent)
+        return this.wrapper
+    }
 
-    textarea.addEventListener("input", () => {
-      const scrollHeight = textarea.scrollHeight;
-      textarea.style.height = scrollHeight + "px";
-    });
+    /**
+     * rendering block tune
+     * @returns {*}
+     */
+    render() {
+        const wrapper = make("div");
+        this.alignmentSettings.map(align => {
+            const button = document.createElement('button');
+            button.classList.add(this.api.styles.settingsButton);
+            button.innerHTML = align.icon;
+            button.type = 'button';
 
-    return this.wrapper;
-  }
-
-  save(blockContent) {
-    const textarea = blockContent.querySelector(textarea);
-    const code = textarea.value;
-    return {
-      code,
-    };
-  }
+            button.classList.toggle(this.api.styles.settingsButtonActive, align.name === this.data.alignment);
+            wrapper.appendChild(button);
+            return button
+        }).forEach((element, index, elements) => {
+            element.addEventListener('click', () => {
+                this.data = {
+                    alignment: this.alignmentSettings[index].name
+                }
+                elements.forEach((el, i) => {
+                    const {name} = this.alignmentSettings[i];
+                    el.classList.toggle(this.api.styles.settingsButtonActive, name === this.data.alignment);
+                    //toggle alignment style class for block
+                    this.wrapper.classList.toggle(this._CSS.alignment[name], name === this.data.alignment)
+                });
+            });
+        });
+        return wrapper;
+    }
+    /**
+     * save
+     * @returns {*}
+     */
+    save() {
+        return this.data;
+    }
 }
 
-export default BlockLayer;
+module.exports = AlignmentBlockTune;

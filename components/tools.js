@@ -14,6 +14,7 @@ import { Paragraph } from "@editorjs/paragraph";
 import NestedList from "@editorjs/nested-list";
 import Marker from "../plugins/marker";
 import Nest from "../plugins/nest";
+import TextVariantTune from "@editorjs/text-variant-tune";
 // import API from '../api/image'
 
 const TOOLS = {
@@ -45,6 +46,10 @@ const TOOLS = {
   },
   Nest: {
     class: Nest,
+  },
+  textVariant: TextVariantTune,
+  paragraph: {
+    tunes: ["textVariant"],
   },
   // image: {
   //   class: Image,
