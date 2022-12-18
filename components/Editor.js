@@ -2,6 +2,7 @@ import React, { memo, useEffect, useRef } from "react";
 import EditorJS from "@editorjs/editorjs";
 import TOOLS from "./tools";
 import DragDrop from "editorjs-drag-drop";
+import nest from "../plugins/nest";
 
 const CustomEditor = ({ data, onChange, holder }) => {
   //initialize editorjs
@@ -13,8 +14,8 @@ const CustomEditor = ({ data, onChange, holder }) => {
       const editor = new EditorJS({
         holder: holder,
         tools: TOOLS,
+		tune: ['nest'],
         autofocus: true,
-		tunes: ['anchorTune'],
         data,
         onReady: () => {
           new DragDrop(editor);

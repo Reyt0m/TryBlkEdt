@@ -15,7 +15,6 @@ import NestedList from "@editorjs/nested-list";
 import Underline from "../plugins/underline";
 import Nest from "../plugins/nest";
 // import API from '../api/image'
-// import AnchorTune from "../plugins/anchor";
 
 const TOOLS = {
   header: {
@@ -47,7 +46,6 @@ const TOOLS = {
   Nest: {
     class: Nest,
   },
-//   anchorTune: AnchorTune,
   // image: {
   //   class: Image,
   //   config: {

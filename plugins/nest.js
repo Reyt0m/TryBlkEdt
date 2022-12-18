@@ -1,22 +1,18 @@
 /* 開発方法についてのコメント
  階層構造をもつブロックを作る。全ブロックが階層構造を持つようにする。
 階層は、ブロックの親子関係を作るpluginで対応する。
-親子関係はどう作ればいい？
 
-親の性質は引き継ぐ
-位置が少し右にずれる。
+block tune plugin として実装
+左と右に移動するボタンを作る
+移動するときは直前のクラスよりもプラス・マイナス1のみ移動可能にする
+プラスに移動する時、可能なら、直前のブロックの中に内包されるようにする。
 
-まずは、一つのブロックを通常より右にずらした位置に配置する方法を考える。
-階層を動かすは、ブロックへの影響であるから、block APIを使う。
-
-階層化については、appendchildで対応出来る。しかし、それを視覚的にわかりやすくするためには別の方法が必要になる。
-pluginではあくまでブロック生成ができるがここで行いたいのは、他のブロックに対してネストを要求するようなものであるはず。
-inlinebarで実装
 */
 import "../styles/plugins.module.scss";
+import * as Dom from '../utils/dom';
 
 export default class Nest {
-  static get isInline() {
+  static get isTune() {
     return true;
   }
   get shortcut() {
@@ -35,23 +31,23 @@ export default class Nest {
     };
   }
   // constructor
-  constructor({ api }) {
+  constructor({ api,data,config,block }) {
     this.button = null;
     this.state = false;
     this.api = api;
+	this.data = data;
+	this.config = config;
+	this.block = block;
     this.tag = "Nest";
     this.count = 0;
+	this.wrapper = undefined;
   }
-  //   css ?これが必要かどうかは不明
-  // ここでスコープの中にいれて、cssの調整を色々やるべき。nested listを見れば良い。
   // render 処理をするためのボタン作成
+//   階層を増やすボタン
   render() {
-    this.button = document.createElement("button");
-    this.button.type = "button";
-    this.button.textContent = "Nest";
+console.log(this.data);
+const tuneWrapper = Dom.make('div','')
 
-    // TODO: icon追加
-    return this.button;
   }
 
   // surround　指定された範囲内の要素に対する処理　ここにブロックの位置を移動する処理を書く
