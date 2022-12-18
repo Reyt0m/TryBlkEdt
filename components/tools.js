@@ -12,7 +12,7 @@ import SimpleImage from "@editorjs/simple-image";
 import BlockLayer from "../plugins/blockLayer";
 import { Paragraph } from "@editorjs/paragraph";
 import NestedList from "@editorjs/nested-list";
-import Marker from "../plugins/marker";
+import Underline from "../plugins/underline";
 import Nest from "../plugins/nest";
 import TextVariantTune from "@editorjs/text-variant-tune";
 // import API from '../api/image'
@@ -41,8 +41,8 @@ const TOOLS = {
   },
   quote: Quote,
   simpleImage: SimpleImage,
-  Marker: {
-    class: Marker,
+  Underline: {
+    class: Underline,
   },
   Nest: {
     class: Nest,

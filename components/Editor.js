@@ -2,10 +2,12 @@ import React, { memo, useEffect, useRef } from "react";
 import EditorJS from "@editorjs/editorjs";
 import TOOLS from "./tools";
 import DragDrop from "editorjs-drag-drop";
+import nest from "../plugins/nest";
 
 const CustomEditor = ({ data, onChange, holder }) => {
   //initialize editorjs
   const ref = useRef();
+
 
   useEffect(() => {
     //initialize editor if we don't have a reference
@@ -13,14 +15,14 @@ const CustomEditor = ({ data, onChange, holder }) => {
       const editor = new EditorJS({
         holder: holder,
         tools: TOOLS,
-		tunes : ['textVariant'],
+		tunes : ['textVariant','nest'],
         autofocus: true,
         data,
         onReady: () => {
           new DragDrop(editor);
         },
         placeholder: "Start writing your story...",
-        async onChange(api, event) {
+        async onChange(api) {
           const data = await api.saver.save();
           onChange(data);
         },

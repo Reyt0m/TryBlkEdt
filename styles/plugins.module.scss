@@ -1,0 +1,24 @@
+.cdx-nest-1 .cdx-nest-2 .cdx-nest-3 .cdx-nest-4 .cdx-nest-5 .cdx-nest-6 {
+	line-height: 1.6em;
+	display: flex;
+	margin: 2px 0;
+	&::before {
+		// counter-increment: item;
+		margin-right: 5px;
+		white-space: nowrap;
+	}
+}
+.cdx-underline {
+  padding-left: 10rem;
+  text-decoration: underline;
+}
+
+.ce-tune-alignment--right {
+	text-align: right;
+}
+.ce-tune-alignment--center {
+	text-align: center;
+}
+.ce-tune-alignment--left {
+	text-align: left;
+}
