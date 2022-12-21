@@ -40,8 +40,8 @@ export default class Nest {
     this.config = config;
     this.block = block;
     this.count = 0;
-    this.paddingLeft = "0rem";
-    this.distance = 0;
+    this.paddingLeft = 0;
+    this.distance = 10;
   }
 
   /**  blockを調整する
@@ -59,22 +59,22 @@ export default class Nest {
     this.wrapper.style.paddingLeft = this.padding;
     console.log(this.wrapper.style.paddingLeft);
     return this.wrapper;
-  }
+}
 
-  // render 処理をするためのボタン作成
-  render() {
-    const wrapper = Dom.make("div");
+// render 処理をするためのボタン作成
+render() {
+	const wrapper = Dom.make("div");
     const button = document.createElement("button");
     button.classList.add(this.api.styles.settingsButton);
     button.innerHTML = "nest";
     button.type = "button";
     wrapper.appendChild(button);
     addEventListener("click", (el) => {
-      this.distance += this.distance;
-      this.padding = this.distance + "rem";
-	  button.classList.toggle(this.api.styles.settingsButtonActive);
+		this.padding = this.distance + "rem";
+		button.classList.toggle(this.api.styles.settingsButtonActive);
+		console.log(this.padding);
     });
-	button.classList.toggle(this.api.styles.settingsButtonActive);
+    button.classList.toggle(this.api.styles.settingsButtonActive);
     return wrapper;
   }
 
