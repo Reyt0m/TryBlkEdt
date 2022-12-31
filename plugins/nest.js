@@ -70,31 +70,25 @@ export default class Nest {
     button.classList.toggle(this.api.styles.settingsButtonActive);
     return wrapper;
   }
-
-  //   いまのところ使いにくい
-  //   tuneWrap(event) {
-  //     const tune = event.target.closest(`.${this.api.styles.settingsButton}`);
-  //     const isEnabled = tune.classList.contains(
-  //       this.api.styles.settingsButtonActive
-  //     );
-  //     tune.classList.toggle(this.api.styles.settingBUttonActive, !isEnabled);
-  //     this.variant = !isEnabled ? tune.dataset.name : "";
-  //     // this.distance = this.distance + this.base;
-  //     // this.padding = this.distance + "rem";
-  //   }
   /**  blockを調整する
    *  blockcontent取得
    *  blockのpaddingを取得
    *  直前のpaddingより小さい場合 10大きいところまで動ける
+   * 	cssが適用されない。
+   * 	renderで押されたボタンのeventを取得して再レンダリングしたい
    *  paddingは非負
    *  paddingが直前のブロックより小さいとき、直前のブロックの子要素になる。
    */
   wrap(blockContent) {
-	const wrapper = d
-    this.wrapper = Dom.make("div");
+	const wrapper = Dom.make("div");
+    // this.wrapper = Dom.make("div");
     // this.wrapper.classList.toggle(this.CSS.nest[this.data]);
+	wrapper.append(blockContent);
     if (this.count === 2) {
-      this.wrapper.style.paddingLeft = "10rem";
+      wrapper.style.paddingLeft = "10rem";
+    }
+    if (this.count === 3) {
+      wrapper.style.paddingLeft = "20rem";
     }
     // this.wrapper.style.padding = "0rem 0rem 0rem 10rem"
 
@@ -106,52 +100,12 @@ export default class Nest {
     // },false);
     // this.wrapper.style.paddingLeft = this.data + "rem";
     // console.log(this.wrapper.style.paddingLeft);
-    this.wrapper.append(blockContent);
+	console.log(blockContent)
+	console.log(wrapper.append(blockContent))
 
-    return this.wrapper;
+    return wrapper;
   }
 
-  // surround　指定された範囲内の要素に対する処理　ここにブロックの位置を移動する処理を書く
-  /**
-  surround(range) {
-    // rangeをブロックに拡張する
-    const selectedElement = range.extractContents();
-    const nest = document.createElement(this.tag);
-
-    // class切り替え
-    let count = this.count;
-    let className = this.CSS.nest[count];
-    // let className = Nest.CSS.nest[count];
-    console.log(className);
-
-    // class追加
-    nest.classList.add(className);
-    nest.appendChild(selectedElement);
-    range.insertNode(nest);
-    console.log(nest);
-
-    // 　count up and save
-    if (this.count < this.CSS.nest.length - 1) {
-      count++;
-    }
-    this.count = count;
-    console.log(count);
-
-    this.api.selection.expandToTag(nest);
-
-    // tabキー読み込み
-    // selectedElement.addEventListener("keydown", (event) => {
-
-    //   if (event.key === "Tab") {
-    // let style = window.getComputedStyle(selectedElement);
-    // let left = parseInt(style.left);
-    // selectedElement.style.left = left + 10 + "px";
-    //   }
-    // });
-    // // 移動した状態のブロックを新しく挿入
-    // range.insertNode(selectedElement);
-  }
-   */
 
   save() {
     return this.data;

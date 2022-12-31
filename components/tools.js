@@ -11,10 +11,12 @@ import Quote from "@editorjs/quote";
 import SimpleImage from "@editorjs/simple-image";
 import { Paragraph } from "@editorjs/paragraph";
 import NestedList from "@editorjs/nested-list";
-import Underline from "../plugins/underline";
+// import Underline from "../plugins/underline";
 import Nest from "../plugins/nest";
+// import TextVariantTune from "@editorjs/text-variant-tune";
+import AlignmentBlockTune from "editorjs-text-alignment-blocktune";
 import TextVariantTune from "@editorjs/text-variant-tune";
-import AlignmentBlockTune from "../plugins/alignment";
+// import NoticeTune from "../plugins/notice";
 // import AlignmentTuneTool from "editorjs-text-alignment-blocktune"
 // import API from '../api/image'
 
@@ -42,14 +44,15 @@ const TOOLS = {
   },
   quote: Quote,
   simpleImage: SimpleImage,
-  Underline: {
-    class: Underline,
-  },
+//   Underline: {
+//     class: Underline,
+//   },
   Nest: {
     class: Nest,
   },
   textVariant: TextVariantTune,
   textAlign: AlignmentBlockTune,
+//   noticeTune: NoticeTune,
   paragraph: {
     // tunes: [
     //   "textVariant",

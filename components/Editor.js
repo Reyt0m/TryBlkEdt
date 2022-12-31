@@ -17,6 +17,7 @@ const CustomEditor = ({ data, onChange, holder }) => {
 			"textVariant",
 			 "textAlign",
 			 "Nest",
+			//  "noticeTune",
 			],
         autofocus: true,
         data,
