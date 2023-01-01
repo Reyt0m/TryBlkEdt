@@ -75,38 +75,38 @@ class AlignmentBlockTune {
     this.nestIcons = [
       {
         name: "previous",
-        icon: "previous"
+        icon: "previous",
       },
       {
         name: "next",
-        icon: "next"
-      }
+        icon: "next",
+      },
     ];
     this.nestSettings = [
       {
         name: "1",
-        icon: "1"
+        icon: "1",
       },
       {
         name: "2",
-        icon: "2"
+        icon: "2",
       },
       {
         name: "3",
-        icon: "3"
+        icon: "3",
       },
       {
         name: "4",
-        icon: "4"
+        icon: "4",
       },
       {
         name: "5",
-        icon: "5"
+        icon: "5",
       },
       {
         name: "6",
-        icon: "6"
-      }
+        icon: "6",
+      },
     ];
     this._CSS = {
       alignment: {
@@ -115,8 +115,8 @@ class AlignmentBlockTune {
         3: "cdx-nest-3",
         4: "cdx-nest-4",
         5: "cdx-nest-5",
-        6: "cdx-nest-6"
-      }
+        6: "cdx-nest-6",
+      },
     };
   }
 
@@ -139,6 +139,12 @@ class AlignmentBlockTune {
    */
   render() {
     const wrapper = make("div");
+    const target = this.api.blocks.getBlockByIndex(
+      this.api.blocks.getCurrentBlockIndex() - 1
+    ).holder;
+    const content = this.api.blocks.getBlockByIndex(
+      this.api.blocks.getCurrentBlockIndex()
+    ).holder;
     const count = 1;
     this.count = 0;
     this.nestIcons
@@ -165,13 +171,20 @@ class AlignmentBlockTune {
             this.count = this.count + count;
           }
           this.data = {
-            alignment: this.nestSettings[this.count].name
+            alignment: this.nestSettings[this.count].name,
           };
           const { name } = this.nestSettings[this.count];
           this.wrapper.className = "";
           this.wrapper.classList.toggle(
             this._CSS.alignment[name],
             name === this.data.alignment
+          );
+          target.insertAdjacentElement("beforeend", content);
+          console.log(target, "\n", content);
+          console.log(
+            this.api.blocks.getBlockByIndex(
+              this.api.blocks.getCurrentBlockIndex() - 1
+            ).holder
           );
         });
       });

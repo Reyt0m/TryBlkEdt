@@ -16,7 +16,6 @@ import SimpleImage from "@editorjs/simple-image";
 // import align from 'editorjs-text-alignment-blocktune'
 import align from "./align.js";
 import paragraph from "@editorjs/paragraph";
-import nest from "./nest";
 
 export const EDITOR_JS_TOOLS = {
   embed: Embed,
@@ -37,15 +36,11 @@ export const EDITOR_JS_TOOLS = {
   align: {
     class: align,
     config: {
-      default: "left",
-      blocks: {
-        header: "center"
-        // list: "right"
-      }
+      default: "0",
     }
   },
-  // nest: {
-  //   class: nest
+  // align: {
+  //   class: align
   // },
   header: {
     class: Header,
@@ -53,6 +48,6 @@ export const EDITOR_JS_TOOLS = {
   },
   paragraph: {
     class: paragraph,
-    tunes: ["align", "nest"]
+    tunes: ["align"]
   }
 };
