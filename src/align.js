@@ -179,14 +179,18 @@ class AlignmentBlockTune {
             this._CSS.alignment[name],
             name === this.data.alignment
           );
-		  
-          target.insertAdjacentElement("beforeend", content);
-          console.log(target, "\n", content);
-          console.log(
-            this.api.blocks.getBlockByIndex(
-              this.api.blocks.getCurrentBlockIndex() - 1
-            ).holder
-          );
+          let deepTarget = target.lastChild;
+          while (deepTarget.lastChild) {
+            deepTarget = deepTarget.lastChild;
+            if (deepTarget.lastChild.lastChild.lastChild === null) {
+              break;
+            }
+          }
+
+            deepTarget.insertAdjacentElement("beforeend", content);
+          //   target.appendChild(content);
+          //   console.log(target, "\n", content);
+          console.log("lastchild:", deepTarget);
         });
       });
     return wrapper;
