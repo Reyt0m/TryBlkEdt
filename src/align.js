@@ -179,7 +179,7 @@ class AlignmentBlockTune {
             this._CSS.alignment[name],
             name === this.data.alignment
           );
-		  
+
           target.insertAdjacentElement("beforeend", content);
           console.log(target, "\n", content);
           console.log(

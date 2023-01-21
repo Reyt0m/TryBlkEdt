@@ -1,11 +1,8 @@
 {
-  "name": "try-rect-editor",
+  "name": "try-react-editor",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "@editorjs/checklist": "latest",
     "@editorjs/code": "latest",
     "@editorjs/delimiter": "latest",
@@ -23,11 +20,15 @@
     "@editorjs/simple-image": "latest",
     "@editorjs/table": "latest",
     "@editorjs/warning": "latest",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
     "editorjs-text-alignment-blocktune": "latest",
+    "firebase": "^9.16.0",
     "parjs": "0.12.7",
-    "react-editor-js": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-editor-js": "latest",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -57,5 +58,17 @@
   },
   "devDependencies": {
     "editorjs-drag-drop": "^1.1.12"
-  }
+  },
+  "description": "- nestを作る事はできたがmoveをしたときに単体で動いてしまう。 = nest構造が浅い\r - dragDrop移動が機能していない。\r ## nest の機能要件\r - 済み 左右に移動する\r - すべてのブロックが移動できるようにする\r - 前後のnestに格納される\r \t前のブロックにcdx-nest-0を付与\r \t自ブロックを前ブロックのdivの中に移動\r \t\t前ブロックのidを取得",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reyt0m/TryBlkEdt.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Reyt0m/TryBlkEdt/issues"
+  },
+  "homepage": "https://github.com/Reyt0m/TryBlkEdt#readme"
 }

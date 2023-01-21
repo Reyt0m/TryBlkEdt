@@ -21,6 +21,8 @@ export const ReactEditor = () => {
 
   const ReactEditorJS = createReactEditorJS();
   return (
+	<>
+	{/* <div>tyui</div> */}
     <ReactEditorJS
       onInitialize={handleInitialize}
       onReady={handleReady}
@@ -143,7 +145,8 @@ export const ReactEditor = () => {
         ],
       }}
     />
+	</>
   );
 };
 
-ReactDOM.render(<ReactEditor />, document.getElementById("app"));
+ReactDOM.render(<ReactEditor />, document.getElementById("root"));
