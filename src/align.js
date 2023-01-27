@@ -25,6 +25,7 @@ function make(tagName, classNames = null, attributes = {}) {
 }
 
 class AlignmentBlockTune {
+// export default class AlignmentBlockTune {
   /**
    * Default alignment
    *
@@ -204,4 +205,4 @@ class AlignmentBlockTune {
   }
 }
 
-module.exports = AlignmentBlockTune;
+// module.exports = AlignmentBlockTune;

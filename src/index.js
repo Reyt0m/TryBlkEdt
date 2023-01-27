@@ -53,7 +53,6 @@ export const ReactEditor = () => {
         <input type="text" ref={dataRef} />
         <button type="submit">Save</button>
       </form> */}
-  	<>
 	{/* <div>tyui</div> */}
     <ReactEditorJS
         onInitialize={handleInitialize}
@@ -177,7 +176,6 @@ export const ReactEditor = () => {
           ],
         }}
       />
-    </>
 	</>
   );
 };
