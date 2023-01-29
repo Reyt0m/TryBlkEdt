@@ -19,21 +19,22 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_APP_ID,
 };
-console.log("init", firebaseConfig.apikey);
 
 // Initialize Firebase
 const App = initializeApp(firebaseConfig);
+// const db = firebaseApp.firestore();
+// const auth = firebaseApp.auth();
 
 export const ReactEditor = () => {
   const editorCore = React.useRef(null);
   //   test upload to firebase
-//   dataを表示するためのもの
-//   const dataRef = React.useRef(null);
-//   const submithandler = (e) => {
-//     e.preventDefault();
-//     handleSubmit(dataRef.current.value);
-//     dataRef.current.value = "";
-//   };
+  //   dataを表示するためのもの
+  const dataRef = React.useRef(null);
+  const submithandler = (e) => {
+    e.preventDefault();
+    handleSubmit(dataRef.current.value);
+    dataRef.current.value = "";
+  };
 
   const handleInitialize = React.useCallback((instance) => {
     editorCore.current = instance;
@@ -48,11 +49,11 @@ export const ReactEditor = () => {
   const ReactEditorJS = createReactEditorJS();
   return (
     <>
-	{/* firebaseのテスト */}
-      {/* <form onSubmit={submithandler}>
+      {/* firebaseのテスト */}
+      <form onSubmit={submithandler}>
         <input type="text" ref={dataRef} />
         <button type="submit">Save</button>
-      </form> */}
+      </form>
       <ReactEditorJS
         onInitialize={handleInitialize}
         onReady={handleReady}
@@ -180,7 +181,10 @@ export const ReactEditor = () => {
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(
+	<>
+
+    <App></App>
   <ReactEditor>
-    <App />
   </ReactEditor>
+  </>
 );
