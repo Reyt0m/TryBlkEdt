@@ -6,6 +6,8 @@
       "**/.*",
       "**/node_modules/**"
     ]
+<<<<<<< HEAD
+=======
   },
   "emulators": {
     "functions": {
@@ -23,5 +25,6 @@
     "ui": {
       "enabled": true
     }
+>>>>>>> 014699d65436ae303d9042e923fffd9deea7d6b2
   }
 }

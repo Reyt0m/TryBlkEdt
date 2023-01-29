@@ -176,7 +176,7 @@ export const ReactEditor = () => {
           ],
         }}
       />
-    </>
+	</>
   );
 };
 
