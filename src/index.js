@@ -1,40 +1,22 @@
 import ReactDOM from "react-dom";
-import React, { Component, useRef, useCallback } from "react";
+import React, { Component,useState, useRef, useCallback } from "react";
 
+//  Editorjs周辺
 import { createReactEditorJS } from "react-editor-js";
-
 import { EDITOR_JS_TOOLS } from "./constants";
 import DragDrop from "editorjs-drag-drop";
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import handleSubmit from "./handle";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
-};
-
-// Initialize Firebase
-const App = initializeApp(firebaseConfig);
-// const db = firebaseApp.firestore();
-// const auth = firebaseApp.auth();
-
-export const ReactEditor = () => {
+const ReactEditor = () => {
   const editorCore = React.useRef(null);
   //   test upload to firebase
   //   dataを表示するためのもの
-  const dataRef = React.useRef(null);
-  const submithandler = (e) => {
-    e.preventDefault();
-    handleSubmit(dataRef.current.value);
-    dataRef.current.value = "";
-  };
+//   const dataRef = React.useRef(null);
+//   const submithandler = (e) => {
+//     e.preventDefault();
+//     handleSubmit(dataRef.current.value);
+//     dataRef.current.value = "";
+//   };
 
   const handleInitialize = React.useCallback((instance) => {
     editorCore.current = instance;
@@ -49,11 +31,6 @@ export const ReactEditor = () => {
   const ReactEditorJS = createReactEditorJS();
   return (
     <>
-      {/* firebaseのテスト */}
-      <form onSubmit={submithandler}>
-        <input type="text" ref={dataRef} />
-        <button type="submit">Save</button>
-      </form>
       <ReactEditorJS
         onInitialize={handleInitialize}
         onReady={handleReady}
@@ -180,11 +157,13 @@ export const ReactEditor = () => {
   );
 };
 
+
+
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<>
-
-    <App></App>
+	{/* <div className="App">hello</div> */}
   <ReactEditor>
   </ReactEditor>
   </>
 );
+export  default ReactEditor;
