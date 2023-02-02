@@ -6,7 +6,7 @@ import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./constants";
 import DragDrop from "editorjs-drag-drop";
 
-
+console.log("DragDrop")
 const ReactEditor = () => {
   const editorCore = React.useRef(null);
   //   test upload to firebase
@@ -162,6 +162,7 @@ const ReactEditor = () => {
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<>
 	{/* <div className="App">hello</div> */}
+	<p>hello</p>
   <ReactEditor>
   </ReactEditor>
   </>
