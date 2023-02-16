@@ -11,8 +11,8 @@ ReactDOM.render(
   <div>
     <p> text</p>
     <ReactEditors />
-    <NewPost />
-    <AllPosts />
+    {/* <NewPost />
+    <AllPosts /> */}
   </div>,
   document.getElementById("app")
 );
