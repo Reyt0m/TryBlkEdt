@@ -3,8 +3,8 @@ import React from "react";
 import ReactEditors from "./Editorjs";
 
 // import App from "./App";
-import NewPost from "./NewPost";
-import AllPosts from "./AllPosts";
+// import NewPost from "./NewPost";
+// import AllPosts from "./AllPosts";
 
 
 ReactDOM.render(

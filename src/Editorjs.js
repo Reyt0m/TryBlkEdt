@@ -19,14 +19,56 @@ const ReactEditors = () => {
     editorCore.current = instance;
   }, []);
 
+//   const handleReady = () => {
+//     const editor = editorCore.current._editorJS;
+//     new DragDrop(editor);
+//   };
+
   const ReactEditorJS = createReactEditorJS();
 
   // 獲得したデータの保存
   const [editorData, setEditorData] = useState([]);
   // データの反映を制御するステートを追加
-  const [isUpdating, setIsUpdating] = useState(true);
+  const [isUpdating, setIsUpdating] = useState(false);
+  //   15秒おきにisUpdatingを反転させて、データの反映を制御する
+  setTimeout(() => {
+    setIsUpdating(!isUpdating);
+    console.log(isUpdating);
+  }, 15000);
+
+  useEffect(() => {
+    // editorコレクションから、timeフィールドで降順にソートし、最初の1件だけを取得するクエリを作成
+    const editorLatestQuery = query(
+      collection(db, "editor"),
+      orderBy("time", "desc"),
+      limit(2)
+    );
+
+    // クエリをリアルタイムに監視し、スナップショットを取得する
+    const unsubscribe = onSnapshot(editorLatestQuery, (snapshot) => {
+      // スナップショットにドキュメントが含まれているかチェック
+      if (!snapshot.empty) {
+        // 最新のドキュメントを取得
+        const doc = snapshot.docs[1];
+        // ドキュメントのデータを取得
+        const data = doc.data();
+        // データをeditorステートにセット
+        setEditorData(data);
+        editorCore.current.render(editorData);
+        // データをjson形式にしてconsole.logに表示
+        console.log(JSON.stringify(editorData.time, null, 2));
+        console.log(JSON.stringify(editorData.blocks, null, 2));
+      }
+    });
+
+    // コンポーネントがアンマウントされるときに、監視を解除する
+    return () => {
+      unsubscribe();
+    };
+  }, [editorCore.current]);
 
   //  editorの中身が変更されるたびに保存
+//   こちらを制限したほうがいいのか？何回もされるのうざいんだが。
   const saved = useCallback(async () => {
     const savedData = await editorCore.current.save();
     // アップロード
@@ -41,47 +83,6 @@ const ReactEditors = () => {
       console.log(error, "error");
     }
   }, []);
-
-//   読み込みに時間制限を設ける
-  setTimeout(() => {
-    setIsUpdating(true);
-	console.log("isUpdatingTime", isUpdating)
-  }, 10000);
-
-  useEffect(() => {
-    // editor初期化チェック
-    if (editorCore.current) {
-      // editorコレクションから、timeフィールドで降順にソートし、最初の1件だけを取得するクエリを作成
-      const editorLatestQuery = query(
-        collection(db, "editor"),
-        orderBy("time", "desc"),
-        limit(2)
-      );
-    //   if (isUpdating) {
-        // クエリをリアルタイムに監視し、スナップショットを取得する
-        const unsubscribe = onSnapshot(editorLatestQuery, (snapshot) => {
-          // スナップショットにドキュメントが含まれているかチェック
-          if (!snapshot.empty) {
-            // 最新のドキュメントを取得
-            const doc = snapshot.docs[1];
-            // ドキュメントのデータを取得
-            const data = doc.data();
-			console.log(data.time,editorData.time)
-            setEditorData(data);
-            editorCore.current.render(editorData);
-            // データをjson形式にしてconsole.logに表示
-            console.log(JSON.stringify(editorData.blocks, null, 2));
-          }
-        });
-		setIsUpdating(!isUpdating);
-		console.log("isUpdatingChange", isUpdating)
-        // コンポーネントがアンマウントされるときに、監視を解除する
-        return () => {
-          unsubscribe();
-        // };
-      }
-    }
-  }, [editorCore.current]);
 
   return (
     <>
