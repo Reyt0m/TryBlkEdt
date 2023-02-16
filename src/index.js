@@ -1,13 +1,8 @@
 import ReactDOM from "react-dom";
-import React, { Component, useRef, useCallback } from "react";
-
-import { createReactEditorJS } from "react-editor-js";
-
-import { EDITOR_JS_TOOLS } from "./constants";
-import DragDrop from "editorjs-drag-drop";
+import React from "react";
 import ReactEditors from "./Editorjs";
 
-import App from "./App";
+// import App from "./App";
 import NewPost from "./NewPost";
 import AllPosts from "./AllPosts";
 
