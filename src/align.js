@@ -1,7 +1,7 @@
 /**
  * Build styles
  */
-require("./index.css").toString();
+require("./styles/index.css").toString();
 /**
  * node 作成用
  * @param tagName

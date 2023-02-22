@@ -9,7 +9,6 @@ import ReactEditors from "./Editorjs";
 
 ReactDOM.render(
   <div>
-    <p> text</p>
     <ReactEditors />
     {/* <NewPost />
     <AllPosts /> */}

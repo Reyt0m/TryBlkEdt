@@ -9,7 +9,6 @@ const firebaseConfig = {
   storageBucket: "blockeditor-4cf9a.appspot.com",
   messagingSenderId: "22729385365",
   appId: "1:22729385365:web:a357b8dfb7ac7c516dc29c"
-
 //   apiKey: process.env.REACT_APP_API_KEY,
 //   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
 //   databaseURL: process.env.REACT_APP_DATA_URL,
