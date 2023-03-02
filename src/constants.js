@@ -1,4 +1,4 @@
-import Embed from "@editorjs/embed";
+import Embed from '@editorjs/embed';
 import Table from "@editorjs/table";
 import List from "@editorjs/list";
 import Warning from "@editorjs/warning";
@@ -18,16 +18,28 @@ import align from "./align.js";
 import paragraph from "@editorjs/paragraph";
 
 export const EDITOR_JS_TOOLS = {
-  embed: Embed,
+	embed: {
+		class: Embed,
+		config: {
+		  services: {
+			youtube: true,
+			coub: true
+		  }
+		}
+	  },
   table: Table,
   marker: Marker,
   list: List,
   warning: Warning,
   code: Code,
-  linkTool: LinkTool,
+  linkTool: {
+	class: LinkTool,
+	config: {
+	  endpoint: 'https://blockeditor-4cf9a.web.app',
+	}
+  },
   image: Image,
   raw: Raw,
-  // header: Header,
   quote: Quote,
   checklist: CheckList,
   delimiter: Delimiter,
@@ -39,9 +51,6 @@ export const EDITOR_JS_TOOLS = {
       default: "0",
     }
   },
-  // align: {
-  //   class: align
-  // },
   header: {
     class: Header,
     tunes: ["align"]

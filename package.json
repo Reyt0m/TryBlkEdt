@@ -7,7 +7,7 @@
     "@editorjs/code": "latest",
     "@editorjs/delimiter": "latest",
     "@editorjs/editorjs": "latest",
-    "@editorjs/embed": "latest",
+    "@editorjs/embed": "^2.5.3",
     "@editorjs/header": "latest",
     "@editorjs/image": "latest",
     "@editorjs/inline-code": "latest",
@@ -30,15 +30,14 @@
     "react-dom": "^18.2.0",
     "react-editor-js": "latest",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "editorjs-drag-drop": "^1.1.12"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-	"deploy": "firebase deploy"
+    "deploy": "firebase deploy"
   },
   "eslintConfig": {
     "extends": [
@@ -59,6 +58,6 @@
     ]
   },
   "devDependencies": {
-    "editorjs-drag-drop": "^1.1.12"
+    "editorjs-drag-drop": "^1.1.13"
   }
 }
